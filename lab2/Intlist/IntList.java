@@ -1,3 +1,5 @@
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Formatter;
 
 /**
@@ -37,7 +39,6 @@ public class IntList {
      * Returns a list equal to L with all elements squared. Destructive.
      */
     public static void dSquareList(IntList L) {
-
         while (L != null) {
             L.first = L.first * L.first;
             L = L.rest;
@@ -82,7 +83,12 @@ public class IntList {
 
     public static IntList dcatenate(IntList A, IntList B) {
         //TODO:  fill in method
-        return null;
+        if (A.rest == null) {
+            A.rest = B;
+            return A;
+        }
+        A.rest = dcatenate (A.rest, B);
+        return A;
     }
 
     /**
@@ -91,7 +97,13 @@ public class IntList {
      */
     public static IntList catenate(IntList A, IntList B) {
         //TODO:  fill in method
-        return null;
+        IntList result = new IntList(A.first, A.rest);
+        if(result.rest == null) {
+            result.rest = B;
+            return result;
+        }
+        result.rest = catenate(A.rest, B);
+        return result;
     }
 
 
